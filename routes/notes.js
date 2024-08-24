@@ -7,11 +7,12 @@ const { body, validationResult } = require("express-validator");
 //Route 1 : Get All the Notes using: Get "/api/auth/getUser".Login required
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
   try {
+    console.log("User ID:", req.user.id);  // Log the user ID
     const notes = await Notes.find({ user: req.user.id });
     res.json(notes);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Internal server error occured");
+    res.status(500).send("Internal server error occurred");
   }
 });
 //Route 2 : Add a new Note : POST "/api/auth/addnote".Login required
